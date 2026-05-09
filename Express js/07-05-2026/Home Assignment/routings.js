@@ -1,0 +1,45 @@
+const express = require("express");
+
+const router = express.Router();
+
+// GET
+router.get("/users/:id", (req, res) => {
+  
+  
+  res.send(`GET user ${req.params.id}`);
+});
+
+// POST
+router.post("/users/:id", (req, res) => {
+  res.send(`POST user ${req.params.id}`);
+});
+
+// PUT
+router.put("/users/:id", (req, res) => {
+  res.send(`PUT user ${req.params.id}`);
+});
+
+// PATCH
+router.patch("/users/:id", (req, res) => {
+  res.send(`PATCH user ${req.params.id}`);
+});
+
+// DELETE
+router.delete("/users/:id", (req, res) => {
+  res.send(`DELETE user ${req.params.id}`);
+});
+// Middleware
+
+router.use((req, res) => {
+
+  const methods = ["GET", "POST", "PUT", "PATCH", "DELETE"];
+
+  if (!methods.includes(req.method)) {
+    return res.status(405).send("Method Not Allowed");
+  }
+
+  res.status(404).send("Page Not Found!!");
+});
+
+
+module.exports = router;
